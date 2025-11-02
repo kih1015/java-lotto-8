@@ -7,5 +7,8 @@ public class Application {
         System.out.println("구매금액을 입력해 주세요.");
         String purchasePrice = Console.readLine();
         Money money = new Money(Integer.parseInt(purchasePrice));
+
+        VendingMachine vendingMachine = new VendingMachine();
+        LottoBundle lottoBundle = vendingMachine.buy(money);
     }
 }
