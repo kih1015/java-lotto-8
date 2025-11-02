@@ -23,5 +23,8 @@ public class Application {
         WinningLotto winningLotto = new WinningLotto(winningNumber, Integer.parseInt(bonusNumber));
 
         Statistics statistics = lottoBundle.calculateStatistics(winningLotto);
+
+        System.out.println(statistics.toString());
+        System.out.println(statistics.calculateProfitRate(money));
     }
 }
