@@ -10,5 +10,9 @@ public class Application {
 
         VendingMachine vendingMachine = new VendingMachine();
         LottoBundle lottoBundle = vendingMachine.buy(money);
+
+        String message = String.format("%d개를 구매했습니다.", money.getPurchases());
+        System.out.println(message);
+        System.out.println(lottoBundle.toString());
     }
 }
