@@ -1,6 +1,7 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 
 public class Application {
     public static void main(String[] args) {
@@ -14,5 +15,11 @@ public class Application {
         String message = String.format("%d개를 구매했습니다.", money.getPurchases());
         System.out.println(message);
         System.out.println(lottoBundle.toString());
+
+        System.out.println("당첨 번호를 입력해 주세요.");
+        Lotto winningNumber = new Lotto(Arrays.stream(Console.readLine().split(",")).map(Integer::parseInt).toList());
+        System.out.println("보너스 번호를 입력해 주세요.");
+        String bonusNumber = Console.readLine();
+        WinningLotto winningLotto = new WinningLotto(winningNumber, Integer.parseInt(bonusNumber));
     }
 }
