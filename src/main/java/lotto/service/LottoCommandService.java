@@ -18,8 +18,11 @@ public class LottoCommandService {
     private final LottoBundleRepository lottoBundleRepository;
     private final StatisticsRepository statisticsRepository;
 
-    public LottoCommandService(LottoGenerator lottoGenerator, LottoBundleRepository lottoBundleRepository,
-                                StatisticsRepository statisticsRepository) {
+    public LottoCommandService(
+            LottoGenerator lottoGenerator,
+            LottoBundleRepository lottoBundleRepository,
+            StatisticsRepository statisticsRepository
+    ) {
         this.lottoGenerator = lottoGenerator;
         this.lottoBundleRepository = lottoBundleRepository;
         this.statisticsRepository = statisticsRepository;
@@ -29,15 +32,14 @@ public class LottoCommandService {
         Money money = new Money(purchaseAmount);
         VendingMachine vendingMachine = new VendingMachine(lottoGenerator);
         LottoBundle lottoBundle = vendingMachine.buy(money);
-
         lottoBundleRepository.save(lottoBundle);
     }
 
     public void calculateStatistics(List<Integer> winningNumbers, int bonusNumber) {
         LottoBundle lottoBundle = lottoBundleRepository.find();
-
+        List<LottoNumber> lottoNumbers = winningNumbers.stream().map(LottoNumber::new).toList();
         WinningLotto winningLotto = new WinningLotto(
-                new Lotto(winningNumbers.stream().map(LottoNumber::new).toList()),
+                new Lotto(lottoNumbers),
                 new LottoNumber(bonusNumber)
         );
         Statistics statistics = lottoBundle.calculateStatistics(winningLotto);
