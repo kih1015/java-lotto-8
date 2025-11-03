@@ -10,30 +10,30 @@ import lotto.domain.Statistics;
 import lotto.domain.VendingMachine;
 import lotto.domain.WinningLotto;
 import lotto.repository.LottoBundleRepository;
-import lotto.view.dto.PurchaseHistoryDto;
-import lotto.view.dto.StatisticsDto;
+import lotto.repository.StatisticsRepository;
 
-public class LottoService {
+public class LottoCommandService {
 
     private final LottoGenerator lottoGenerator;
     private final LottoBundleRepository lottoBundleRepository;
+    private final StatisticsRepository statisticsRepository;
 
-    public LottoService(LottoGenerator lottoGenerator, LottoBundleRepository lottoBundleRepository) {
+    public LottoCommandService(LottoGenerator lottoGenerator, LottoBundleRepository lottoBundleRepository,
+                                StatisticsRepository statisticsRepository) {
         this.lottoGenerator = lottoGenerator;
         this.lottoBundleRepository = lottoBundleRepository;
+        this.statisticsRepository = statisticsRepository;
     }
 
-    public PurchaseHistoryDto purchaseLotto(int purchaseAmount) {
+    public void purchaseLotto(int purchaseAmount) {
         Money money = new Money(purchaseAmount);
         VendingMachine vendingMachine = new VendingMachine(lottoGenerator);
         LottoBundle lottoBundle = vendingMachine.buy(money);
 
         lottoBundleRepository.save(lottoBundle);
-
-        return PurchaseHistoryDto.of(money, lottoBundle);
     }
 
-    public StatisticsDto calculateStatistics(List<Integer> winningNumbers, int bonusNumber) {
+    public void calculateStatistics(List<Integer> winningNumbers, int bonusNumber) {
         LottoBundle lottoBundle = lottoBundleRepository.find();
 
         WinningLotto winningLotto = new WinningLotto(
@@ -41,6 +41,6 @@ public class LottoService {
                 new LottoNumber(bonusNumber)
         );
         Statistics statistics = lottoBundle.calculateStatistics(winningLotto);
-        return StatisticsDto.of(statistics, lottoBundle.getMoney());
+        statisticsRepository.save(statistics);
     }
 }
