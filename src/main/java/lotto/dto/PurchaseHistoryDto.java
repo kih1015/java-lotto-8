@@ -28,7 +28,7 @@ public record PurchaseHistoryDto(int purchaseCount, String lottoInfo) {
                 .map(LottoNumber::number)
                 .map(String::valueOf)
                 .toList();
-        String format = String.join(",", lottoNumbers);
+        String format = String.join(", ", lottoNumbers);
         return String.format("[%s]", format);
     }
 }

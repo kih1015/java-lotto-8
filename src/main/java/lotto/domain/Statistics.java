@@ -16,7 +16,7 @@ public class Statistics {
     }
 
     public Double calculateProfitRate(Money purchaseAmount) {
-        return ((double) calculateProfit()) / purchaseAmount.amount();
+        return ((double) calculateProfit()) / purchaseAmount.amount() * 100;
     }
 
     private Long calculateProfit() {

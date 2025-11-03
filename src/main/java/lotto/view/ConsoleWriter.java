@@ -15,7 +15,8 @@ public class ConsoleWriter {
         System.out.println("당첨 통계");
         System.out.println("---");
         System.out.println(dto.statisticsInfo());
-        String message = String.format("총 수익률은 %.2f%%입니다.", dto.profitRate());
+        String formattedRate = String.format("%.2f", dto.profitRate()).replaceAll("0+$", "").replaceAll("\\.$", "");
+        String message = String.format("총 수익률은 %s%%입니다.", formattedRate);
         System.out.println(message);
     }
 }
