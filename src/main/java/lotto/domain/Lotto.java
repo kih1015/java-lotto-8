@@ -11,12 +11,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private void validate(List<LottoNumber> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
-        }
-    }
-
     public int countMatches(Lotto winning) {
         return (int) numbers.stream()
                 .filter(winning::contains)
@@ -27,8 +21,13 @@ public class Lotto {
         return numbers.contains(bonusNumber);
     }
 
-    @Override
-    public String toString() {
-        return String.format("[%s]", String.join(",", numbers.stream().map(String::valueOf).toList()));
+    public List<LottoNumber> getNumbers() {
+        return numbers;
+    }
+
+    private void validate(List<LottoNumber> numbers) {
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+        }
     }
 }
