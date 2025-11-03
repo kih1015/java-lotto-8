@@ -1,4 +1,4 @@
-package lotto.view.dto;
+package lotto.dto;
 
 import java.util.Map.Entry;
 import lotto.domain.Money;

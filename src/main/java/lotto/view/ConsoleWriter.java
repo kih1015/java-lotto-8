@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.view.dto.PurchaseHistoryDto;
-import lotto.view.dto.StatisticsDto;
+import lotto.dto.PurchaseHistoryDto;
+import lotto.dto.StatisticsDto;
 
 public class ConsoleWriter {
 

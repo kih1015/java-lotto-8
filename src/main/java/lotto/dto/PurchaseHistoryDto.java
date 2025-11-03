@@ -1,4 +1,4 @@
-package lotto.view.dto;
+package lotto.dto;
 
 import lotto.domain.LottoBundle;
 import lotto.domain.Money;

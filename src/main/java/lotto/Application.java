@@ -9,8 +9,8 @@ import lotto.service.LottoCommandService;
 import lotto.service.LottoQueryService;
 import lotto.view.ConsoleReader;
 import lotto.view.ConsoleWriter;
-import lotto.view.dto.PurchaseHistoryDto;
-import lotto.view.dto.StatisticsDto;
+import lotto.dto.PurchaseHistoryDto;
+import lotto.dto.StatisticsDto;
 
 public class Application {
     public static void main(String[] args) {

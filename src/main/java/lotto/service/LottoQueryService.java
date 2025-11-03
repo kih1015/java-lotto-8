@@ -4,8 +4,8 @@ import lotto.domain.LottoBundle;
 import lotto.domain.Statistics;
 import lotto.repository.LottoBundleRepository;
 import lotto.repository.StatisticsRepository;
-import lotto.view.dto.PurchaseHistoryDto;
-import lotto.view.dto.StatisticsDto;
+import lotto.dto.PurchaseHistoryDto;
+import lotto.dto.StatisticsDto;
 
 public class LottoQueryService {
 
