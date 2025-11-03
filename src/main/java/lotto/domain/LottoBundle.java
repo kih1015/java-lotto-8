@@ -10,10 +10,16 @@ import java.util.stream.Collectors;
 
 public class LottoBundle {
 
+    private final Money money;
     private final List<Lotto> lottoBundle;
 
-    public LottoBundle(List<Lotto> lottoBundle) {
+    public LottoBundle(Money money, List<Lotto> lottoBundle) {
+        this.money = money;
         this.lottoBundle = lottoBundle;
+    }
+
+    public Money getMoney() {
+        return money;
     }
 
     public List<Lotto> getLottos() {

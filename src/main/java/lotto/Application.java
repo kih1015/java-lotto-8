@@ -1,6 +1,8 @@
 package lotto;
 
 import java.util.List;
+import lotto.repository.InMemoryLottoBundleRepository;
+import lotto.repository.LottoBundleRepository;
 import lotto.service.LottoService;
 import lotto.view.ConsoleReader;
 import lotto.view.ConsoleWriter;
@@ -11,7 +13,8 @@ public class Application {
     public static void main(String[] args) {
         ConsoleReader reader = new ConsoleReader();
         ConsoleWriter writer = new ConsoleWriter();
-        LottoService lottoService = new LottoService(new RandomLottoGenerator());
+        LottoBundleRepository repository = new InMemoryLottoBundleRepository();
+        LottoService lottoService = new LottoService(new RandomLottoGenerator(), repository);
 
         int purchaseAmount = reader.readPurchaseAmount();
         PurchaseHistoryDto purchaseHistoryDto = lottoService.purchaseLotto(purchaseAmount);

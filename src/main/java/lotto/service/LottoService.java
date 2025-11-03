@@ -9,32 +9,38 @@ import lotto.domain.Money;
 import lotto.domain.Statistics;
 import lotto.domain.VendingMachine;
 import lotto.domain.WinningLotto;
+import lotto.repository.LottoBundleRepository;
 import lotto.view.dto.PurchaseHistoryDto;
 import lotto.view.dto.StatisticsDto;
 
 public class LottoService {
 
     private final LottoGenerator lottoGenerator;
-    private LottoBundle lottoBundle;
-    private Money money;
+    private final LottoBundleRepository lottoBundleRepository;
 
-    public LottoService(LottoGenerator lottoGenerator) {
+    public LottoService(LottoGenerator lottoGenerator, LottoBundleRepository lottoBundleRepository) {
         this.lottoGenerator = lottoGenerator;
+        this.lottoBundleRepository = lottoBundleRepository;
     }
 
     public PurchaseHistoryDto purchaseLotto(int purchaseAmount) {
-        this.money = new Money(purchaseAmount);
+        Money money = new Money(purchaseAmount);
         VendingMachine vendingMachine = new VendingMachine(lottoGenerator);
-        this.lottoBundle = vendingMachine.buy(money);
+        LottoBundle lottoBundle = vendingMachine.buy(money);
+
+        lottoBundleRepository.save(lottoBundle);
+
         return PurchaseHistoryDto.of(money, lottoBundle);
     }
 
     public StatisticsDto calculateStatistics(List<Integer> winningNumbers, int bonusNumber) {
+        LottoBundle lottoBundle = lottoBundleRepository.find();
+
         WinningLotto winningLotto = new WinningLotto(
                 new Lotto(winningNumbers.stream().map(LottoNumber::new).toList()),
                 new LottoNumber(bonusNumber)
         );
         Statistics statistics = lottoBundle.calculateStatistics(winningLotto);
-        return StatisticsDto.of(statistics, money);
+        return StatisticsDto.of(statistics, lottoBundle.getMoney());
     }
 }
