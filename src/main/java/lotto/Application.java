@@ -1,6 +1,13 @@
 package lotto;
 
-import lotto.domain.*;
+import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoBundle;
+import lotto.domain.LottoNumber;
+import lotto.domain.Money;
+import lotto.domain.Statistics;
+import lotto.domain.VendingMachine;
+import lotto.domain.WinningLotto;
 import lotto.view.ConsoleReader;
 import lotto.view.ConsoleWriter;
 
@@ -10,11 +17,17 @@ public class Application {
         ConsoleWriter writer = new ConsoleWriter();
         VendingMachine vendingMachine = new VendingMachine(new RandomLottoGenerator());
 
-        Money money = reader.inputMoney();
+        int purchaseAmount = reader.readPurchaseAmount();
+        Money money = new Money(purchaseAmount);
         LottoBundle lottoBundle = vendingMachine.buy(money);
         writer.writePurchaseHistory(money, lottoBundle);
 
-        WinningLotto winningLotto = reader.inputWinningLotto();
+        List<Integer> numbers = reader.readWinningNumbers();
+        int bonusNumber = reader.readBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(
+                new Lotto(numbers.stream().map(LottoNumber::new).toList()),
+                new LottoNumber(bonusNumber)
+        );
         Statistics statistics = lottoBundle.calculateStatistics(winningLotto);
         writer.writeStatistics(money, statistics);
     }

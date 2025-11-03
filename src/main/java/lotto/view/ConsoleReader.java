@@ -1,30 +1,30 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Money;
-import lotto.domain.WinningLotto;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ConsoleReader {
 
-    public Money inputMoney() {
+    public int readPurchaseAmount() {
         System.out.println("구매금액을 입력해 주세요.");
-        String purchasePrice = Console.readLine();
-        return new Money(parseInt(purchasePrice));
+        return parseInt(Console.readLine());
     }
 
-    public WinningLotto inputWinningLotto() {
+    public List<Integer> readWinningNumbers() {
         System.out.println("당첨 번호를 입력해 주세요.");
-        Lotto winningNumber = new Lotto(Arrays.stream(Console.readLine().split(",")).map(this::parseInt).map(LottoNumber::new).toList());
-        System.out.println("보너스 번호를 입력해 주세요.");
-        String bonusNumber = Console.readLine();
-        return new WinningLotto(winningNumber, new LottoNumber(parseInt(bonusNumber)));
+        return Arrays.stream(Console.readLine().split(","))
+                .map(this::parseInt)
+                .toList();
     }
 
-    private Integer parseInt(String number) {
+    public int readBonusNumber() {
+        System.out.println("보너스 번호를 입력해 주세요.");
+        return parseInt(Console.readLine());
+    }
+
+    private int parseInt(String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
