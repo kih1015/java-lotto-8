@@ -1,9 +1,16 @@
 package lotto.domain;
 
-import camp.nextstep.edu.missionutils.Randoms;
+import lotto.LottoGenerator;
+
 import java.util.stream.IntStream;
 
 public class VendingMachine {
+
+    private final LottoGenerator generator;
+
+    public VendingMachine(LottoGenerator generator) {
+        this.generator = generator;
+    }
 
     public LottoBundle buy(Money money) {
         int quantity = money.getPurchases();
@@ -12,7 +19,7 @@ public class VendingMachine {
 
     private LottoBundle generateLottoBundle(int quantity) {
         return new LottoBundle(IntStream.range(0, quantity)
-                .mapToObj(i -> new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6)))
+                .mapToObj(i -> generator.generateLotto())
                 .toList());
     }
 }

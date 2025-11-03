@@ -8,7 +8,7 @@ public class Application {
     public static void main(String[] args) {
         ConsoleReader reader = new ConsoleReader();
         ConsoleWriter writer = new ConsoleWriter();
-        VendingMachine vendingMachine = new VendingMachine();
+        VendingMachine vendingMachine = new VendingMachine(new RandomLottoGenerator());
 
         Money money = reader.inputMoney();
         LottoBundle lottoBundle = vendingMachine.buy(money);
