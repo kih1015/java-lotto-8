@@ -21,7 +21,7 @@ public record StatisticsDto(String statisticsInfo, double profitRate) {
                 .sorted(Entry.comparingByKey())
                 .forEach(entry -> {
                     String string = String.format("%d개 일치 (%d원) - %d개",
-                            entry.getKey().getMatchCount(),
+                            entry.getKey().matchCount(),
                             entry.getKey().prize(),
                             entry.getValue()
                     );

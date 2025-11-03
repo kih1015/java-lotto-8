@@ -19,10 +19,6 @@ public enum Rank {
         this.prize = prize;
     }
 
-    public long prize() {
-        return prize;
-    }
-
     public static Optional<Rank> of(int matched, boolean bonusMatched) {
         if (matched == 6) {
             return Optional.of(FIRST);
@@ -42,7 +38,11 @@ public enum Rank {
         return Optional.empty();
     }
 
-    public int getMatchCount() {
+    public long prize() {
+        return prize;
+    }
+
+    public int matchCount() {
         return matchCount;
     }
 }
