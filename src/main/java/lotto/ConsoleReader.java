@@ -1,0 +1,22 @@
+package lotto;
+
+import camp.nextstep.edu.missionutils.Console;
+
+import java.util.Arrays;
+
+public class ConsoleReader {
+
+    public Money inputMoney() {
+        System.out.println("구매금액을 입력해 주세요.");
+        String purchasePrice = Console.readLine();
+        return new Money(Integer.parseInt(purchasePrice));
+    }
+
+    public WinningLotto inputWinningLotto() {
+        System.out.println("당첨 번호를 입력해 주세요.");
+        Lotto winningNumber = new Lotto(Arrays.stream(Console.readLine().split(",")).map(Integer::parseInt).toList());
+        System.out.println("보너스 번호를 입력해 주세요.");
+        String bonusNumber = Console.readLine();
+        return new WinningLotto(winningNumber, Integer.parseInt(bonusNumber));
+    }
+}
