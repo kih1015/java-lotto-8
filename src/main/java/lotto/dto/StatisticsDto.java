@@ -20,12 +20,12 @@ public record StatisticsDto(String statisticsInfo, double profitRate) {
                 .stream()
                 .sorted(Entry.comparingByKey())
                 .forEach(entry -> {
-                    String str = String.format("%d개 일치 (%d원) - %d개",
+                    String string = String.format("%d개 일치 (%d원) - %d개",
                             entry.getKey().getMatchCount(),
                             entry.getKey().prize(),
                             entry.getValue()
                     );
-                    sb.append(str).append('\n');
+                    sb.append(string).append('\n');
                 });
         return sb.toString();
     }

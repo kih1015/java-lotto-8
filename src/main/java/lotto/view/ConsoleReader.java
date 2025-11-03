@@ -1,7 +1,6 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +13,7 @@ public class ConsoleReader {
 
     public List<Integer> readWinningNumbers() {
         System.out.println("당첨 번호를 입력해 주세요.");
+        System.out.println();
         return Arrays.stream(Console.readLine().split(","))
                 .map(this::parseInt)
                 .toList();
@@ -21,6 +21,7 @@ public class ConsoleReader {
 
     public int readBonusNumber() {
         System.out.println("보너스 번호를 입력해 주세요.");
+        System.out.println();
         return parseInt(Console.readLine());
     }
 
