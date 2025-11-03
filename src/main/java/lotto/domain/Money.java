@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public record Money(Integer amount) {
 

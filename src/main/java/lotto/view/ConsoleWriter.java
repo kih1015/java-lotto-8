@@ -1,4 +1,8 @@
-package lotto;
+package lotto.view;
+
+import lotto.domain.LottoBundle;
+import lotto.domain.Money;
+import lotto.domain.Statistics;
 
 public class ConsoleWriter {
 

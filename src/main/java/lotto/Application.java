@@ -1,5 +1,9 @@
 package lotto;
 
+import lotto.domain.*;
+import lotto.view.ConsoleReader;
+import lotto.view.ConsoleWriter;
+
 public class Application {
     public static void main(String[] args) {
         ConsoleReader reader = new ConsoleReader();
