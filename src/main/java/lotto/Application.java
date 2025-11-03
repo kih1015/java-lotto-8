@@ -20,7 +20,7 @@ public class Application {
         int purchaseAmount = reader.readPurchaseAmount();
         Money money = new Money(purchaseAmount);
         LottoBundle lottoBundle = vendingMachine.buy(money);
-        writer.writePurchaseHistory(money, lottoBundle);
+        writer.writePurchaseHistory(money.getPurchases(), lottoBundle.toString());
 
         List<Integer> numbers = reader.readWinningNumbers();
         int bonusNumber = reader.readBonusNumber();
@@ -29,6 +29,6 @@ public class Application {
                 new LottoNumber(bonusNumber)
         );
         Statistics statistics = lottoBundle.calculateStatistics(winningLotto);
-        writer.writeStatistics(money, statistics);
+        writer.writeStatistics(statistics.toString(), statistics.calculateProfitRate(money));
     }
 }
