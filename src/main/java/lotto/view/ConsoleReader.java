@@ -2,6 +2,7 @@ package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Money;
 import lotto.domain.WinningLotto;
 
@@ -17,10 +18,10 @@ public class ConsoleReader {
 
     public WinningLotto inputWinningLotto() {
         System.out.println("당첨 번호를 입력해 주세요.");
-        Lotto winningNumber = new Lotto(Arrays.stream(Console.readLine().split(",")).map(this::parseInt).toList());
+        Lotto winningNumber = new Lotto(Arrays.stream(Console.readLine().split(",")).map(this::parseInt).map(LottoNumber::new).toList());
         System.out.println("보너스 번호를 입력해 주세요.");
         String bonusNumber = Console.readLine();
-        return new WinningLotto(winningNumber, parseInt(bonusNumber));
+        return new WinningLotto(winningNumber, new LottoNumber(parseInt(bonusNumber)));
     }
 
     private Integer parseInt(String number) {
