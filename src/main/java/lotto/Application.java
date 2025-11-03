@@ -1,28 +1,22 @@
 package lotto;
 
 import java.util.List;
-import lotto.repository.InMemoryLottoBundleRepository;
-import lotto.repository.InMemoryStatisticsRepository;
-import lotto.repository.LottoBundleRepository;
-import lotto.repository.StatisticsRepository;
+import lotto.dto.PurchaseHistoryDto;
+import lotto.dto.StatisticsDto;
+import lotto.factory.LottoAppFactory;
 import lotto.service.LottoCommandService;
 import lotto.service.LottoQueryService;
 import lotto.view.ConsoleReader;
 import lotto.view.ConsoleWriter;
-import lotto.dto.PurchaseHistoryDto;
-import lotto.dto.StatisticsDto;
 
 public class Application {
     public static void main(String[] args) {
-        ConsoleReader reader = new ConsoleReader();
-        ConsoleWriter writer = new ConsoleWriter();
+        LottoAppFactory factory = new LottoAppFactory();
 
-        LottoBundleRepository lottoBundleRepository = new InMemoryLottoBundleRepository();
-        StatisticsRepository statisticsRepository = new InMemoryStatisticsRepository();
-
-        LottoCommandService commandService = new LottoCommandService(
-                new RandomLottoGenerator(), lottoBundleRepository, statisticsRepository);
-        LottoQueryService queryService = new LottoQueryService(lottoBundleRepository, statisticsRepository);
+        ConsoleReader reader = factory.createReader();
+        ConsoleWriter writer = factory.createWriter();
+        LottoCommandService commandService = factory.createCommandService();
+        LottoQueryService queryService = factory.createQueryService();
 
         int purchaseAmount = reader.readPurchaseAmount();
         commandService.purchaseLotto(purchaseAmount);
