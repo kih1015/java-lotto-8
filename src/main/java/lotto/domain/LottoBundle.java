@@ -16,6 +16,10 @@ public class LottoBundle {
         this.lottoBundle = lottoBundle;
     }
 
+    public List<Lotto> getLottos() {
+        return lottoBundle;
+    }
+
     public Statistics calculateStatistics(WinningLotto winningLotto) {
         Map<Rank, Long> winningCounts = Arrays.stream(Rank.values())
                 .collect(Collectors.toMap(
@@ -32,12 +36,5 @@ public class LottoBundle {
                 .forEach(rank -> winningCounts.merge(rank, 1L, Long::sum));
 
         return new Statistics(winningCounts);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        lottoBundle.forEach(lotto -> stringBuilder.append(lotto.toString()).append('\n'));
-        return stringBuilder.toString();
     }
 }

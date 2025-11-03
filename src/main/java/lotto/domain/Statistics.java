@@ -11,24 +11,12 @@ public class Statistics {
         this.winningCounts = new EnumMap<>(winningCounts);
     }
 
-    public Double calculateProfitRate(Money purchaseAmount) {
-        return ((double) calculateProfit()) / purchaseAmount.amount();
+    public Map<Rank, Long> getWinningCounts() {
+        return new EnumMap<>(winningCounts);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        winningCounts.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> {
-                    String str = String.format("%d개 일치 (%d원) - %d개",
-                            entry.getKey().getMatchCount(),
-                            entry.getKey().prize(),
-                            entry.getValue()
-                    );
-                    sb.append(str).append('\n');
-                });
-        return sb.toString();
+    public Double calculateProfitRate(Money purchaseAmount) {
+        return ((double) calculateProfit()) / purchaseAmount.amount();
     }
 
     private Long calculateProfit() {

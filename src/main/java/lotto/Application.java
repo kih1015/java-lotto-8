@@ -10,6 +10,8 @@ import lotto.domain.VendingMachine;
 import lotto.domain.WinningLotto;
 import lotto.view.ConsoleReader;
 import lotto.view.ConsoleWriter;
+import lotto.view.dto.PurchaseHistoryDto;
+import lotto.view.dto.StatisticsDto;
 
 public class Application {
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class Application {
         int purchaseAmount = reader.readPurchaseAmount();
         Money money = new Money(purchaseAmount);
         LottoBundle lottoBundle = vendingMachine.buy(money);
-        writer.writePurchaseHistory(money.getPurchases(), lottoBundle.toString());
+        writer.writePurchaseHistory(PurchaseHistoryDto.of(money, lottoBundle));
 
         List<Integer> numbers = reader.readWinningNumbers();
         int bonusNumber = reader.readBonusNumber();
@@ -29,6 +31,6 @@ public class Application {
                 new LottoNumber(bonusNumber)
         );
         Statistics statistics = lottoBundle.calculateStatistics(winningLotto);
-        writer.writeStatistics(statistics.toString(), statistics.calculateProfitRate(money));
+        writer.writeStatistics(StatisticsDto.of(statistics, money));
     }
 }
