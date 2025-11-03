@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(tree:*)",
+      "Bash(gradlew test:*)",
+      "Bash(.gradlew.bat test)",
+      "Bash(cmd /c gradlew.bat test)",
+      "Bash(gradlew.bat test:*)",
+      "Bash(./gradlew test)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
