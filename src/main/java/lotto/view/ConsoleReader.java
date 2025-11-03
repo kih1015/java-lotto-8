@@ -29,7 +29,9 @@ public class ConsoleReader {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 숫자를 입력해 주세요.");
+            String errorMessage = "[ERROR] 숫자를 입력해 주세요.";
+            System.out.println(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
         }
     }
 }
